@@ -19,6 +19,7 @@ export default async ({ app }: { app: express.Application }) => {
     err.name = "NotFoundError";
   });
 
+  //Catches Celebrate Errors
   app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     if (!isCelebrateError(err)) {
       return next(err);
@@ -26,7 +27,7 @@ export default async ({ app }: { app: express.Application }) => {
     return res.status(400).send(err.details.get("body")).end();
   });
 
-  //Handles errors in endpoints
+  //Catches other errors
   app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     switch (err.name) {
       case "UnauthorizedError":
