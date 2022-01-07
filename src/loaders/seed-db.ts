@@ -18,9 +18,9 @@ const createTables = async () => {
 
 const addDummyData = async () => {
   await postgres.pool.query("INSERT INTO users (fullName, password, email) VALUES($1, $2, $3)", [
-    "Chandra Panta",
+    "Jimmy",
     "Password",
-    "chandra.panta345@hotmail.com"
+    "jimmy@hotmail.com"
   ]);
 };
 

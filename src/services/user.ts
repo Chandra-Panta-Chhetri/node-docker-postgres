@@ -1,6 +1,4 @@
-import bcrypt from "bcryptjs";
 import { EventDispatcher } from "event-dispatch";
-import ErrorService from "./error";
 import events from "../subscribers/events";
 
 export default class UserService {
@@ -18,17 +16,7 @@ export default class UserService {
     this._eventDispatcher.dispatch(events.user.signIn);
   }
 
-  private async hashPassword(password = "") {
-    const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/;
-    if (!passwordRegex.test(password)) {
-      throw new ErrorService(
-        "ValidationError",
-        "Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number"
-      );
-    }
-    const salt = await bcrypt.genSalt(10);
-    return await bcrypt.hash(password, salt);
-  }
+  private async hashPassword(password = "") {}
 
   public async resetPassword() {}
 
